@@ -1,19 +1,16 @@
 <template>
     <div id="app">
         <HelloWorld msg="Welcome to Your Vue.js App"/>
-        <br/>
-        <Counter v-bind:clicks="clicks"/>
-        <br/>
-        <Clicker/>
-        <LoginComponent/>
+        <LoginComponent v-if="!loggedIn"/>
+        <Username v-if="loggedIn"/>
     </div>
 </template>
 
 <script>
     import HelloWorld from './components/HelloWorld.vue'
-    import Counter from "./components/Counter";
-    import Clicker from "./components/Clicker";
     import LoginComponent from "./components/LoginComponent";
+    import {mapGetters, mapState} from "vuex";
+    import Username from "./components/Username";
 
     export default {
         name: 'app',
@@ -22,10 +19,15 @@
                 clicks: 0
             }
         },
+        computed: {
+            ...mapState({
+                access: state => state.clicks
+            }),
+            ...mapGetters(["loggedIn"])
+        },
         components: {
             LoginComponent,
-            Clicker,
-            Counter,
+            Username,
             HelloWorld
         }
     }
