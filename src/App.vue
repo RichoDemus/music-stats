@@ -5,6 +5,7 @@
         <Counter v-bind:clicks="clicks"/>
         <br/>
         <Clicker/>
+        <LoginComponent/>
     </div>
 </template>
 
@@ -12,6 +13,7 @@
     import HelloWorld from './components/HelloWorld.vue'
     import Counter from "./components/Counter";
     import Clicker from "./components/Clicker";
+    import LoginComponent from "./components/LoginComponent";
 
     export default {
         name: 'app',
@@ -21,6 +23,7 @@
             }
         },
         components: {
+            LoginComponent,
             Clicker,
             Counter,
             HelloWorld
