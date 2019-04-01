@@ -15,7 +15,7 @@
             url: "https://accounts.spotify.com/authorize" +
                 "?client_id=a4463063c9834dd3bc5976eaa6f9e7c3" +
                 "&response_type=token" +
-                "&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fcallback" +
+                "&redirect_uri=https%3A%2F%2Frichodemus.github.io%2Fmusic-stats%2Fcallback" +
                 "&scope=" +
                 "&show_dialog=false" +
                 "&state=" + uuidv4()
