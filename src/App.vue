@@ -9,20 +9,12 @@
 <script>
     import HelloWorld from './components/HelloWorld.vue'
     import LoginComponent from "./components/LoginComponent";
-    import {mapGetters, mapState} from "vuex";
+    import {mapGetters} from "vuex";
     import Username from "./components/Username";
 
     export default {
         name: 'app',
-        data() {
-            return {
-                clicks: 0
-            }
-        },
         computed: {
-            ...mapState({
-                access: state => state.clicks
-            }),
             ...mapGetters(["loggedIn"])
         },
         components: {

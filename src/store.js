@@ -5,19 +5,33 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        clicks: 0,
-        accessToken: null
+        accessToken: null,
+        username: null
     },
     mutations: {
-        increment(state) {
-            state.clicks++
-        },
-        login(state, accessToken) {
+        loggedIn(state, accessToken) {
             state.accessToken = accessToken
+        },
+        SET_USERNAME(state, username) {
+            state.username = username;
         }
     },
     actions: {
-        // increment: ({commit}) => commit('increment')
+        loggedIn: (context, accessToken) => {
+            console.log("loggedIn Action:", accessToken, context);
+            context.commit('loggedIn', accessToken);
+            fetch("https://api.spotify.com/v1/me", {
+                headers: new Headers({
+                    "Authorization": "Bearer " + accessToken
+                })
+            })
+                .then(response => response.json())
+                .then(myJson => {
+                    console.log(myJson);
+                    context.commit("SET_USERNAME", myJson.id)
+                });
+
+        }
     },
     getters: {
       loggedIn: state => !!state.accessToken //check if non-null and non-empty

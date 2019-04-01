@@ -7,7 +7,7 @@
 <script>
     import getParameterByName from "../util/QueryString";
     import uuidv4 from 'uuid/v4'
-    import {mapMutations} from "vuex";
+    import {mapActions, mapMutations} from "vuex";
 
     export default {
         name: "LoginComponent",
@@ -35,13 +35,17 @@
                 console.log("Error:", err);
                 // todo handle error
                 window.history.pushState('Main', 'Title', '/');
-                this.login(accessToken)
+                // this.login(accessToken);
+                this.loggedIn(accessToken);
             }
         },
         methods: {
             ...mapMutations({
                 login: 'login'
-            })
+            }),
+            ...mapActions([
+                'loggedIn'
+            ])
         }
     }
 </script>
