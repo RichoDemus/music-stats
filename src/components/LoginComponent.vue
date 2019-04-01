@@ -15,14 +15,14 @@
             url: "https://accounts.spotify.com/authorize" +
                 "?client_id=a4463063c9834dd3bc5976eaa6f9e7c3" +
                 "&response_type=token" +
-                "&redirect_uri=https%3A%2F%2Frichodemus.github.io%2Fmusic-stats%2Fcallback" +
+                "&redirect_uri=https%3A%2F%2Frichodemus.github.io%2Fmusic-stats" +
                 "&scope=" +
                 "&show_dialog=false" +
                 "&state=" + uuidv4()
         }),
         mounted() {
-            if (window.location.pathname === "/callback") {
-                const accessToken = getParameterByName("access_token");
+            const accessToken = getParameterByName("access_token");
+            if (accessToken) {
                 const tokenType = getParameterByName("token_type");
                 const expiresIn = getParameterByName("expires_in");
                 const err = getParameterByName("error");
@@ -34,7 +34,7 @@
                 console.log("State:", state);
                 console.log("Error:", err);
                 // todo handle error
-                window.history.pushState('Main', 'Title', '/');
+                window.history.pushState('Main', 'Title', '/music-stats');
                 // this.login(accessToken);
                 this.loggedIn(accessToken);
             }
