@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex);
+
+const vuexLocal = new VuexPersistence({
+    storage: window.localStorage
+});
 
 export default new Vuex.Store({
     state: {
@@ -34,11 +39,13 @@ export default new Vuex.Store({
         }
     },
     getters: {
-      loggedIn: state => !!state.accessToken //check if non-null and non-empty
+        loggedIn: state => !!state.accessToken //check if non-null and non-empty
     },
-    plugins: [store => {
-        store.subscribe((mutation, state) => {
-            console.log("State change:", mutation, {accessToken: state.accessToken});
-        })
-    }]
+    plugins: [
+        vuexLocal.plugin,
+        store => {
+            store.subscribe((mutation, state) => {
+                console.log("State change:", mutation, {accessToken: state.accessToken});
+            })
+        }]
 })
